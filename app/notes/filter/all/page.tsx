@@ -6,6 +6,13 @@ import {
 
 import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notes - All Tags",
+  description:
+    "Browse notes tegged with all tags. NoteHub allows you to filter and view notes based on specific tags for better organization.",
+};
 
 const PER_PAGE = 12;
 
