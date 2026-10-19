@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -8,8 +9,6 @@ import { fetchNotes } from "@/lib/api";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 
 import css from "./NotesPage.module.css";
 
@@ -19,7 +18,6 @@ export default function NotesByTagClient({ tag }: { tag: string }) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: ["notes", search, page, tag],
@@ -38,10 +36,6 @@ export default function NotesByTagClient({ tag }: { tag: string }) {
     handleSearch(value);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
@@ -55,13 +49,9 @@ export default function NotesByTagClient({ tag }: { tag: string }) {
           />
         )}
 
-        <button
-          type="button"
-          className={css.button}
-          onClick={() => setIsModalOpen(true)}
-        >
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isLoading && <strong>Loading...</strong>}
@@ -73,12 +63,6 @@ export default function NotesByTagClient({ tag }: { tag: string }) {
       {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
 
       {data && data.notes.length === 0 && !isLoading && <p>No notes found.</p>}
-
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )}
     </div>
   );
 }
