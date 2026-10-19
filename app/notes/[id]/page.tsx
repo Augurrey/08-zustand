@@ -12,21 +12,19 @@ interface NoteDetailsProps {
   params: Promise<{ id: string }>;
 }
 
-type NetadataProps = {
-  params: Promise<{ id: string }>;
-};
-
 export async function generateMetadata({
   params,
-}: NetadataProps): Promise<Metadata> {
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
-  const note = fetchNoteById(id);
+  const note = await fetchNoteById(id);
   return {
-    title: `${(await note).title}`,
-    description: `${(await note).content}`,
+    title: `${note.title}`,
+    description: `${note.content}`,
     openGraph: {
-      title: `${(await note).title}`,
-      description: `${(await note).content}`,
+      title: `${note.title}`,
+      description: `${note.content}`,
       url: "https://08-zustand-five-eta.vercel.app/notes/" + id,
       images: [
         {
