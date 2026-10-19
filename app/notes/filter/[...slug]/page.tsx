@@ -27,11 +27,11 @@ export async function generateMetadata({
   const noteTag = slug[0];
   return {
     title: `Notes - ${noteTag}`,
-    description: `Browse notes tegged with ${noteTag}. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
+    description: `Browse notes tagged with ${noteTag}. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
     openGraph: {
       title: `Notes - ${noteTag}`,
-      description: `Browse notes tegged with ${noteTag}. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
-      url: "https://notehub.com/",
+      description: `Browse notes tagged with ${noteTag}. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
+      url: "https://08-zustand-five-eta.vercel.app/notes/filter/" + noteTag,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
