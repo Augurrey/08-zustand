@@ -24,6 +24,19 @@ export async function generateMetadata({
   return {
     title: `${(await note).title}`,
     description: `${(await note).content}`,
+    openGraph: {
+      title: `${(await note).title}`,
+      description: `${(await note).content}`,
+      url: "https://notehub.com/",
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: "NoteHub Open Graph Image",
+        },
+      ],
+    },
   };
 }
 
